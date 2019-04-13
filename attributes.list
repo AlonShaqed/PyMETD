@@ -1,0 +1,26 @@
+nombre,Nombre,s,0,nr
+disco,Minimo de espacio en Disco (GB),n,3.3,r
+ram,Minimo de RAM base (GB),n,11.6,r
+procesador,Minimo de frec. en procesador (GHz),n,13,nr
+popularidad,Calificacion del OS@http://alternativeto.net@alternativeto.net,n,2,nr
+$void,Software para Base de Datos,s,0,nr
+bdVariedad,Variedad (numero),n,3.325,nr
+bdNMP,Mas popular (Nombre),s,0,nr
+likertBDNMP,Calificacion del BD@http://alternativeto.net@alternativeto.net,n,9.975,nr
+$void,Software para Servidor Web,s,0,nr
+swVariedad,Variedad (cantidad),n,4.15,nr
+swNMP,Mas popular (Nombre),s,0,nr
+likertSWNMP,Calificacion del SW@http://alternativeto.net@alternativeto.net,n,12.45,nr
+$void,Seguridad,s,0,nr
+actualizaciones,Frecuencia de actualizaciones (dias),n,5,r
+sClienteRemoto,Seguridad del cliente remoto (1 al 7),n,8,nr
+sFirewall,Seguridad del firewall(1 al 7),n,7,nr
+$void,Latencia,s,0,nr
+latHTTP,HTTP (kbps),n,5.71,nr
+latPing,Ping (ms),n,2.28,r
+latFTP,FTP (kbps),n,3.43,nr
+ops,Operaciones por segundo,n,6.86,nr
+$void,Costos,s,0.86,nr
+cOS,Costo de OS (USD),n,0.8,nr
+cSW,Costo del Servidor Web (USD),n,0.5,nr
+cBD,Costo de Base de Datos (USD),n,0.2,nr
