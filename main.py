@@ -54,7 +54,7 @@ def load_numerical_labels_at(no):
 def writeToJson(element, path="proyecto.json"):
 	if type(element) is type({}):
 		file = open(path, "+a")
-		file.write(json.dumps(element))
+		file.write(json.dumps(element) + "\n")
 
 def avgs_values():
 	dict_ = importJson()
@@ -118,6 +118,7 @@ def agregar_elemento(label):
 				element[label[0]] = data
 
 	writeToJson(element)
+	app.clearAllEntries()
 
 
 app.startSubWindow("Agregar", modal=True)
