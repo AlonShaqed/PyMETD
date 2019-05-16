@@ -185,7 +185,8 @@ def calcular_AHP():
                 s += str(element)
             else:
                 s += str(element) + "  |  "
-        string_list.append(s)        
+        string_list.append(s)
+    app.deleteAllTableRows("Averages")
     app.addTableRows("Averages",sorted_list)
     app.showSubWindow("Promedio")
     plot(values, "Atributos", "SOs", "Rendimiento", load_numerical_labels_at(0))
