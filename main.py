@@ -1,11 +1,28 @@
 #==Imports
-from appJar import gui
-import json
-import operator
+try:
+	from appJar import gui
+	import json
+	import operator
 
-from misc import *
-from ahp import *
-from plotit import *
+	from misc import *
+	from ahp import *
+	from plotit import *
+except ModuleNotFoundError as error:
+	print("Error:",error)
+	with open("requirements.txt", "r") as file:
+		modules = file.readlines()
+	if error.name + '\n' in modules:
+		print("Instalando modulos faltantes...")
+
+		import subprocess
+		import sys
+
+		subprocess.call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
+		print("INSTALACION COMPLETA\nIntente correr el comando `python main.py` nuevamente")
+		exit()
+	else:
+		print("Módulo", error.name, "no est'a listado en 'requirements.txt'. Puede que el paquete este incompleto")
+
 
 #==========================================================================Backend
 def importJson(filepath="proyecto.json"):
@@ -21,7 +38,14 @@ def load_labels():
 	lines = file.readlines()
 	labels = [] #--------Labels & entry names
 	for line in lines:
-		labels.append(line[:-1].split(","))
+		if line[0] != "#":
+			label = []
+			
+			read_line = line[:-1].split(",")
+
+			for reg in read_line:
+				label.append(reg.strip())
+			labels.append(label)
 
 	return labels
 
@@ -96,17 +120,25 @@ def avgs_values():
 		itemsValues[names_vector[i]] = avgs.xMatrix[i]
 
 	return itemsAvgs, itemsValues
+
+
 #=============================================================================GUI
+
 menubar = [["Agregar","Cargar"], ["AHP"]]
 app = gui("AHP")
+
+
 #========================================================Promedios
+
 app.startSubWindow("Promedio", modal=True)
 app.addLabel("Avgtext", "Esta ventana muestra la tabla de calificaciones promedio de las alternativas.")
 app.addLabel("Avgtext1", "La tabla está ordenada hacia abajo de mejor a peor.")
 app.addTable("Averages", [["Nombre", "Promedio"]])
 app.stopSubWindow()
+
 #==========================================================//
 #=========================================================Agregar subwindow
+
 def agregar_elemento(label):
 	element = {}
 	for label in labels:
@@ -136,6 +168,7 @@ for label in labels:
 
 app.addButton("Agregar", agregar_elemento)
 app.stopSubWindow()
+
 #==============================================================//
 
 def agregar():
@@ -205,8 +238,10 @@ def funct_calcular(label):
 app.setSize(800,500)
 
 #==============================================================Ventana principal
+
 app.addMenuList("Editar", menubar[0], funct_editar)
 app.addMenuList("Calcular", menubar[1], funct_calcular)
 app.addListBox("Atributos", [], 0,1, colspan=2, rowspan=7)
 app.go()
+
 #====================================================================//
